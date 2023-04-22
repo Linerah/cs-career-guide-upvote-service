@@ -1,7 +1,7 @@
 import json
 
 from bson import json_util
-from flask import Flask, request, jsonify
+from flask import Flask, request
 import pymongo
 from flask_cors import CORS, cross_origin
 
