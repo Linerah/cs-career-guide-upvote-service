@@ -36,3 +36,14 @@ def upvote():
             return 'Upvote deleted'
         return 'Upvote not registered'
     return json.loads(json_util.dumps(db.upvote.find()))
+
+
+@app.route("/upvote_count", methods=['POST', 'GET'])
+@cross_origin()
+def upvote_count():
+    if request.method == "POST":
+        blog_id = request.json['blog_id']
+        count = db.upvote.count_documents({"blog_id": blog_id})
+        return str(count)
+
+    return "endpoint exists"
