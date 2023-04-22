@@ -29,12 +29,12 @@ def upvote():
         if value == 1:
             if db.upvote.find_one(upvote_info) is None:
                 db.upvote.insert_one(upvote_info)
-                db.my_collection.update({"blog_id": blog_id}, {"$inc": {"upvote_count": 1}})  # this could be an error
+                db.blogs.update({"blog_id": blog_id}, {"$inc": {"upvote_count": 1}})  # this could be an error
                 return 'Upvote registered'
             return 'Upvote already registered'
         elif value == -1:
             db.upvote.delete_one(upvote_info)
-            db.my_collection.update({"blog_id": blog_id}, {"$inc": {"upvote_count": -1}})  # this could be an error
+            db.blogs.update({"blog_id": blog_id}, {"$inc": {"upvote_count": -1}})  # this could be an error
             return 'Upvote deleted'
         return 'Upvote not registered'
     return json.loads(json_util.dumps(db.upvote.find()))
